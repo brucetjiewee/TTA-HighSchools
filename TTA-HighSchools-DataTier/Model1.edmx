@@ -1,0 +1,1133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AcademicYear">
+          <Key>
+            <PropertyRef Name="AcademicYearID" />
+          </Key>
+          <Property Name="AcademicYearID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Duration" Type="int" />
+        </EntityType>
+        <EntityType Name="AccessLevel">
+          <Key>
+            <PropertyRef Name="AccessLevelID" />
+          </Key>
+          <Property Name="AccessLevelID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="GradeID" />
+          </Key>
+          <Property Name="GradeID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GradeSubjectTeacher">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+            <PropertyRef Name="TeacherID" />
+          </Key>
+          <Property Name="SubjectID" Type="int" Nullable="false" />
+          <Property Name="TeacherID" Type="int" Nullable="false" />
+          <Property Name="GradeID" Type="int" />
+        </EntityType>
+        <EntityType Name="Parent">
+          <Key>
+            <PropertyRef Name="ParentID" />
+          </Key>
+          <Property Name="ParentID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="10" />
+          <Property Name="Surname" Type="char" MaxLength="10" />
+          <Property Name="Gender" Type="char" MaxLength="10" />
+          <Property Name="IDNumber" Type="char" MaxLength="10" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="SchoolID" Type="int" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="SchoolID" />
+          </Key>
+          <Property Name="SchoolID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Addess" Type="varchar" MaxLength="255" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="20" />
+          <Property Name="ContactPerson" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="SessionID" />
+            <PropertyRef Name="SessionTypeID" />
+          </Key>
+          <Property Name="SessionID" Type="int" Nullable="false" />
+          <Property Name="VenueID" Type="int" />
+          <Property Name="WeekdayID" Type="int" />
+          <Property Name="SessionTypeID" Type="int" Nullable="false" />
+          <Property Name="SubjectID" Type="int" />
+          <Property Name="AcademicYearID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SessionType">
+          <Key>
+            <PropertyRef Name="SessionTypeID" />
+          </Key>
+          <Property Name="SessionTypeID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="SchoolID" />
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="SchoolID" Type="int" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IDNumber" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="DOB" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentParent">
+          <Key>
+            <PropertyRef Name="ParentID" />
+            <PropertyRef Name="StudentID" />
+            <PropertyRef Name="SchoolID" />
+          </Key>
+          <Property Name="ParentID" Type="int" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="SchoolID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentSession">
+          <Key>
+            <PropertyRef Name="SessionID" />
+            <PropertyRef Name="SessionTypeID" />
+            <PropertyRef Name="StudentID" />
+            <PropertyRef Name="SchoolID" />
+          </Key>
+          <Property Name="SessionID" Type="int" Nullable="false" />
+          <Property Name="SessionTypeID" Type="int" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="SchoolID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'TTA ERD.dbo.StudentSubject' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="StudentSubject">
+          <Property Name="SubjectID" Type="int" />
+          <Property Name="StudentID" Type="int" />
+          <Property Name="SchoolID" Type="int" />
+        </EntityType>-->
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="int" Nullable="false" />
+          <Property Name="SubjectName" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="TeacherID" />
+          </Key>
+          <Property Name="SchoolID" Type="int" />
+          <Property Name="TeacherID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="10" />
+          <Property Name="Surname" Type="char" MaxLength="10" />
+          <Property Name="Type" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TeacherSession">
+          <Key>
+            <PropertyRef Name="SessionID" />
+            <PropertyRef Name="SessionTypeID" />
+            <PropertyRef Name="TeacherID" />
+          </Key>
+          <Property Name="SessionID" Type="int" Nullable="false" />
+          <Property Name="SessionTypeID" Type="int" Nullable="false" />
+          <Property Name="TeacherID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="SchoolID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="AccessLevelID" Type="int" />
+          <Property Name="SchoolID" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Venue">
+          <Key>
+            <PropertyRef Name="VenueID" />
+          </Key>
+          <Property Name="VenueID" Type="int" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MaxCapacity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Weekday">
+          <Key>
+            <PropertyRef Name="WeekdayID" />
+          </Key>
+          <Property Name="WeekdayID" Type="int" Nullable="false" />
+          <Property Name="WeekdayName" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="AcademicYear_Session_FK1">
+          <End Role="AcademicYear" Type="Self.AcademicYear" Multiplicity="1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicYear">
+              <PropertyRef Name="AcademicYearID" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="AcademicYearID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AccessLevel_User_FK1">
+          <End Role="AccessLevel" Type="Self.AccessLevel" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccessLevel">
+              <PropertyRef Name="AccessLevelID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="AccessLevelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Grade_GradeSubjectTeacher_FK1">
+          <End Role="Grade" Type="Self.Grade" Multiplicity="0..1" />
+          <End Role="GradeSubjectTeacher" Type="Self.GradeSubjectTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="GradeID" />
+            </Principal>
+            <Dependent Role="GradeSubjectTeacher">
+              <PropertyRef Name="GradeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Parent_StudentParent_FK1">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="StudentParent" Type="Self.StudentParent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentID" />
+            </Principal>
+            <Dependent Role="StudentParent">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="School_Student_FK1">
+          <End Role="School" Type="Self.School" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="School_Teacher_FK1">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="School_User_FK1">
+          <End Role="School" Type="Self.School" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Session_StudentSession_FK1">
+          <End Role="Session" Type="Self.Session" Multiplicity="1" />
+          <End Role="StudentSession" Type="Self.StudentSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="SessionID" />
+              <PropertyRef Name="SessionTypeID" />
+            </Principal>
+            <Dependent Role="StudentSession">
+              <PropertyRef Name="SessionID" />
+              <PropertyRef Name="SessionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Session_TeacherSession_FK1">
+          <End Role="Session" Type="Self.Session" Multiplicity="1" />
+          <End Role="TeacherSession" Type="Self.TeacherSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="SessionID" />
+              <PropertyRef Name="SessionTypeID" />
+            </Principal>
+            <Dependent Role="TeacherSession">
+              <PropertyRef Name="SessionID" />
+              <PropertyRef Name="SessionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SessionType_Session_FK1">
+          <End Role="SessionType" Type="Self.SessionType" Multiplicity="1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SessionType">
+              <PropertyRef Name="SessionTypeID" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="SessionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Student_StudentParent_FK1">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentParent" Type="Self.StudentParent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="StudentParent">
+              <PropertyRef Name="StudentID" />
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Student_StudentSession_FK1">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentSession" Type="Self.StudentSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="StudentSession">
+              <PropertyRef Name="StudentID" />
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+error 6004: The table 'TTA ERD.dbo.StudentSubject' is referenced by a relationship, but cannot be found.
+        <Association Name="Student_StudentSubject_FK1" />-->
+        <Association Name="Subject_GradeSubjectTeacher_FK1">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="GradeSubjectTeacher" Type="Self.GradeSubjectTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="GradeSubjectTeacher">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Subject_Session_FK1">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+error 6004: The table 'TTA ERD.dbo.StudentSubject' is referenced by a relationship, but cannot be found.
+        <Association Name="Subject_StudentSubject_FK1" />-->
+        <Association Name="Teacher_GradeSubjectTeacher_FK1">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="GradeSubjectTeacher" Type="Self.GradeSubjectTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeacherID" />
+            </Principal>
+            <Dependent Role="GradeSubjectTeacher">
+              <PropertyRef Name="TeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Teacher_TeacherSession_FK1">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="TeacherSession" Type="Self.TeacherSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeacherID" />
+            </Principal>
+            <Dependent Role="TeacherSession">
+              <PropertyRef Name="TeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Parent_FK1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Parent" Type="Self.Parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="Parent">
+              <PropertyRef Name="UserID" />
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Venue_Session_FK1">
+          <End Role="Venue" Type="Self.Venue" Multiplicity="0..1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venue">
+              <PropertyRef Name="VenueID" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="VenueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Weekday_Session_FK1">
+          <End Role="Weekday" Type="Self.Weekday" Multiplicity="0..1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Weekday">
+              <PropertyRef Name="WeekdayID" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="WeekdayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="AcademicYear" EntityType="Self.AcademicYear" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccessLevel" EntityType="Self.AccessLevel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grade" EntityType="Self.Grade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GradeSubjectTeacher" EntityType="Self.GradeSubjectTeacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parent" EntityType="Self.Parent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="School" EntityType="Self.School" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Session" EntityType="Self.Session" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SessionType" EntityType="Self.SessionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentParent" EntityType="Self.StudentParent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentSession" EntityType="Self.StudentSession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeacherSession" EntityType="Self.TeacherSession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Venue" EntityType="Self.Venue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Weekday" EntityType="Self.Weekday" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="AcademicYear_Session_FK1" Association="Self.AcademicYear_Session_FK1">
+            <End Role="AcademicYear" EntitySet="AcademicYear" />
+            <End Role="Session" EntitySet="Session" />
+          </AssociationSet>
+          <AssociationSet Name="AccessLevel_User_FK1" Association="Self.AccessLevel_User_FK1">
+            <End Role="AccessLevel" EntitySet="AccessLevel" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="Grade_GradeSubjectTeacher_FK1" Association="Self.Grade_GradeSubjectTeacher_FK1">
+            <End Role="Grade" EntitySet="Grade" />
+            <End Role="GradeSubjectTeacher" EntitySet="GradeSubjectTeacher" />
+          </AssociationSet>
+          <AssociationSet Name="Parent_StudentParent_FK1" Association="Self.Parent_StudentParent_FK1">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="StudentParent" EntitySet="StudentParent" />
+          </AssociationSet>
+          <AssociationSet Name="School_Student_FK1" Association="Self.School_Student_FK1">
+            <End Role="School" EntitySet="School" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="School_Teacher_FK1" Association="Self.School_Teacher_FK1">
+            <End Role="School" EntitySet="School" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="School_User_FK1" Association="Self.School_User_FK1">
+            <End Role="School" EntitySet="School" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="Session_StudentSession_FK1" Association="Self.Session_StudentSession_FK1">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="StudentSession" EntitySet="StudentSession" />
+          </AssociationSet>
+          <AssociationSet Name="Session_TeacherSession_FK1" Association="Self.Session_TeacherSession_FK1">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="TeacherSession" EntitySet="TeacherSession" />
+          </AssociationSet>
+          <AssociationSet Name="SessionType_Session_FK1" Association="Self.SessionType_Session_FK1">
+            <End Role="SessionType" EntitySet="SessionType" />
+            <End Role="Session" EntitySet="Session" />
+          </AssociationSet>
+          <AssociationSet Name="Student_StudentParent_FK1" Association="Self.Student_StudentParent_FK1">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentParent" EntitySet="StudentParent" />
+          </AssociationSet>
+          <AssociationSet Name="Student_StudentSession_FK1" Association="Self.Student_StudentSession_FK1">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentSession" EntitySet="StudentSession" />
+          </AssociationSet>
+          <AssociationSet Name="Subject_GradeSubjectTeacher_FK1" Association="Self.Subject_GradeSubjectTeacher_FK1">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="GradeSubjectTeacher" EntitySet="GradeSubjectTeacher" />
+          </AssociationSet>
+          <AssociationSet Name="Subject_Session_FK1" Association="Self.Subject_Session_FK1">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Session" EntitySet="Session" />
+          </AssociationSet>
+          <AssociationSet Name="Teacher_GradeSubjectTeacher_FK1" Association="Self.Teacher_GradeSubjectTeacher_FK1">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="GradeSubjectTeacher" EntitySet="GradeSubjectTeacher" />
+          </AssociationSet>
+          <AssociationSet Name="Teacher_TeacherSession_FK1" Association="Self.Teacher_TeacherSession_FK1">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="TeacherSession" EntitySet="TeacherSession" />
+          </AssociationSet>
+          <AssociationSet Name="User_Parent_FK1" Association="Self.User_Parent_FK1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Parent" EntitySet="Parent" />
+          </AssociationSet>
+          <AssociationSet Name="Venue_Session_FK1" Association="Self.Venue_Session_FK1">
+            <End Role="Venue" EntitySet="Venue" />
+            <End Role="Session" EntitySet="Session" />
+          </AssociationSet>
+          <AssociationSet Name="Weekday_Session_FK1" Association="Self.Weekday_Session_FK1">
+            <End Role="Weekday" EntitySet="Weekday" />
+            <End Role="Session" EntitySet="Session" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AcademicYear">
+          <Key>
+            <PropertyRef Name="AcademicYearID" />
+          </Key>
+          <Property Name="AcademicYearID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Duration" Type="Int32" />
+          <NavigationProperty Name="Sessions" Relationship="Self.AcademicYear_Session_FK1" FromRole="AcademicYear" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="AccessLevel">
+          <Key>
+            <PropertyRef Name="AccessLevelID" />
+          </Key>
+          <Property Name="AccessLevelID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.AccessLevel_User_FK1" FromRole="AccessLevel" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="GradeID" />
+          </Key>
+          <Property Name="GradeID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="GradeSubjectTeachers" Relationship="Self.Grade_GradeSubjectTeacher_FK1" FromRole="Grade" ToRole="GradeSubjectTeacher" />
+        </EntityType>
+        <EntityType Name="GradeSubjectTeacher">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+            <PropertyRef Name="TeacherID" />
+          </Key>
+          <Property Name="SubjectID" Type="Int32" Nullable="false" />
+          <Property Name="TeacherID" Type="Int32" Nullable="false" />
+          <Property Name="GradeID" Type="Int32" />
+          <NavigationProperty Name="Grade" Relationship="Self.Grade_GradeSubjectTeacher_FK1" FromRole="GradeSubjectTeacher" ToRole="Grade" />
+          <NavigationProperty Name="Subject" Relationship="Self.Subject_GradeSubjectTeacher_FK1" FromRole="GradeSubjectTeacher" ToRole="Subject" />
+          <NavigationProperty Name="Teacher" Relationship="Self.Teacher_GradeSubjectTeacher_FK1" FromRole="GradeSubjectTeacher" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Parent">
+          <Key>
+            <PropertyRef Name="ParentID" />
+          </Key>
+          <Property Name="ParentID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Surname" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="IDNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="SchoolID" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.User_Parent_FK1" FromRole="Parent" ToRole="User" />
+          <NavigationProperty Name="Students" Relationship="Self.StudentParent" FromRole="Parent" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="SchoolID" />
+          </Key>
+          <Property Name="SchoolID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Addess" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Students" Relationship="Self.School_Student_FK1" FromRole="School" ToRole="Student" />
+          <NavigationProperty Name="Teachers" Relationship="Self.School_Teacher_FK1" FromRole="School" ToRole="Teacher" />
+          <NavigationProperty Name="Users" Relationship="Self.School_User_FK1" FromRole="School" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="SessionID" />
+            <PropertyRef Name="SessionTypeID" />
+          </Key>
+          <Property Name="SessionID" Type="Int32" Nullable="false" />
+          <Property Name="VenueID" Type="Int32" />
+          <Property Name="WeekdayID" Type="Int32" />
+          <Property Name="SessionTypeID" Type="Int32" Nullable="false" />
+          <Property Name="SubjectID" Type="Int32" />
+          <Property Name="AcademicYearID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AcademicYear" Relationship="Self.AcademicYear_Session_FK1" FromRole="Session" ToRole="AcademicYear" />
+          <NavigationProperty Name="SessionType" Relationship="Self.SessionType_Session_FK1" FromRole="Session" ToRole="SessionType" />
+          <NavigationProperty Name="Subject" Relationship="Self.Subject_Session_FK1" FromRole="Session" ToRole="Subject" />
+          <NavigationProperty Name="Venue" Relationship="Self.Venue_Session_FK1" FromRole="Session" ToRole="Venue" />
+          <NavigationProperty Name="Weekday" Relationship="Self.Weekday_Session_FK1" FromRole="Session" ToRole="Weekday" />
+          <NavigationProperty Name="Students" Relationship="Self.StudentSession" FromRole="Session" ToRole="Student" />
+          <NavigationProperty Name="Teachers" Relationship="Self.TeacherSession" FromRole="Session" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="SessionType">
+          <Key>
+            <PropertyRef Name="SessionTypeID" />
+          </Key>
+          <Property Name="SessionTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Sessions" Relationship="Self.SessionType_Session_FK1" FromRole="SessionType" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="SchoolID" />
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="SchoolID" Type="Int32" Nullable="false" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDNumber" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="School" Relationship="Self.School_Student_FK1" FromRole="Student" ToRole="School" />
+          <NavigationProperty Name="Parents" Relationship="Self.StudentParent" FromRole="Student" ToRole="Parent" />
+          <NavigationProperty Name="Sessions" Relationship="Self.StudentSession" FromRole="Student" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="Int32" Nullable="false" />
+          <Property Name="SubjectName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="GradeSubjectTeachers" Relationship="Self.Subject_GradeSubjectTeacher_FK1" FromRole="Subject" ToRole="GradeSubjectTeacher" />
+          <NavigationProperty Name="Sessions" Relationship="Self.Subject_Session_FK1" FromRole="Subject" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="TeacherID" />
+          </Key>
+          <Property Name="SchoolID" Type="Int32" />
+          <Property Name="TeacherID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Surname" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="GradeSubjectTeachers" Relationship="Self.Teacher_GradeSubjectTeacher_FK1" FromRole="Teacher" ToRole="GradeSubjectTeacher" />
+          <NavigationProperty Name="School" Relationship="Self.School_Teacher_FK1" FromRole="Teacher" ToRole="School" />
+          <NavigationProperty Name="Sessions" Relationship="Self.TeacherSession" FromRole="Teacher" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="SchoolID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AccessLevelID" Type="Int32" />
+          <Property Name="SchoolID" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AccessLevel" Relationship="Self.AccessLevel_User_FK1" FromRole="User" ToRole="AccessLevel" />
+          <NavigationProperty Name="Parents" Relationship="Self.User_Parent_FK1" FromRole="User" ToRole="Parent" />
+          <NavigationProperty Name="School" Relationship="Self.School_User_FK1" FromRole="User" ToRole="School" />
+        </EntityType>
+        <EntityType Name="Venue">
+          <Key>
+            <PropertyRef Name="VenueID" />
+          </Key>
+          <Property Name="VenueID" Type="Int32" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaxCapacity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sessions" Relationship="Self.Venue_Session_FK1" FromRole="Venue" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="Weekday">
+          <Key>
+            <PropertyRef Name="WeekdayID" />
+          </Key>
+          <Property Name="WeekdayID" Type="Int32" Nullable="false" />
+          <Property Name="WeekdayName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Sessions" Relationship="Self.Weekday_Session_FK1" FromRole="Weekday" ToRole="Session" />
+        </EntityType>
+        <Association Name="AcademicYear_Session_FK1">
+          <End Role="AcademicYear" Type="Self.AcademicYear" Multiplicity="1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicYear">
+              <PropertyRef Name="AcademicYearID" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="AcademicYearID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AccessLevel_User_FK1">
+          <End Role="AccessLevel" Type="Self.AccessLevel" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccessLevel">
+              <PropertyRef Name="AccessLevelID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="AccessLevelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Grade_GradeSubjectTeacher_FK1">
+          <End Role="Grade" Type="Self.Grade" Multiplicity="0..1" />
+          <End Role="GradeSubjectTeacher" Type="Self.GradeSubjectTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="GradeID" />
+            </Principal>
+            <Dependent Role="GradeSubjectTeacher">
+              <PropertyRef Name="GradeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Subject_GradeSubjectTeacher_FK1">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="GradeSubjectTeacher" Type="Self.GradeSubjectTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="GradeSubjectTeacher">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Teacher_GradeSubjectTeacher_FK1">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="GradeSubjectTeacher" Type="Self.GradeSubjectTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeacherID" />
+            </Principal>
+            <Dependent Role="GradeSubjectTeacher">
+              <PropertyRef Name="TeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Parent_FK1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Parent" Type="Self.Parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="Parent">
+              <PropertyRef Name="UserID" />
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="School_Student_FK1">
+          <End Role="School" Type="Self.School" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="School_Teacher_FK1">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="School_User_FK1">
+          <End Role="School" Type="Self.School" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SessionType_Session_FK1">
+          <End Role="SessionType" Type="Self.SessionType" Multiplicity="1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SessionType">
+              <PropertyRef Name="SessionTypeID" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="SessionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Subject_Session_FK1">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Venue_Session_FK1">
+          <End Role="Venue" Type="Self.Venue" Multiplicity="0..1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venue">
+              <PropertyRef Name="VenueID" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="VenueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Weekday_Session_FK1">
+          <End Role="Weekday" Type="Self.Weekday" Multiplicity="0..1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Weekday">
+              <PropertyRef Name="WeekdayID" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="WeekdayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StudentParent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="*" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+        </Association>
+        <Association Name="StudentSession">
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+        </Association>
+        <Association Name="TeacherSession">
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="TTA_ERDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AcademicYears" EntityType="Self.AcademicYear" />
+          <EntitySet Name="AccessLevels" EntityType="Self.AccessLevel" />
+          <EntitySet Name="Grades" EntityType="Self.Grade" />
+          <EntitySet Name="GradeSubjectTeachers" EntityType="Self.GradeSubjectTeacher" />
+          <EntitySet Name="Parents" EntityType="Self.Parent" />
+          <EntitySet Name="Schools" EntityType="Self.School" />
+          <EntitySet Name="Sessions" EntityType="Self.Session" />
+          <EntitySet Name="SessionTypes" EntityType="Self.SessionType" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Venues" EntityType="Self.Venue" />
+          <EntitySet Name="Weekdays" EntityType="Self.Weekday" />
+          <AssociationSet Name="AcademicYear_Session_FK1" Association="Self.AcademicYear_Session_FK1">
+            <End Role="AcademicYear" EntitySet="AcademicYears" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="AccessLevel_User_FK1" Association="Self.AccessLevel_User_FK1">
+            <End Role="AccessLevel" EntitySet="AccessLevels" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="Grade_GradeSubjectTeacher_FK1" Association="Self.Grade_GradeSubjectTeacher_FK1">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="GradeSubjectTeacher" EntitySet="GradeSubjectTeachers" />
+          </AssociationSet>
+          <AssociationSet Name="Subject_GradeSubjectTeacher_FK1" Association="Self.Subject_GradeSubjectTeacher_FK1">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="GradeSubjectTeacher" EntitySet="GradeSubjectTeachers" />
+          </AssociationSet>
+          <AssociationSet Name="Teacher_GradeSubjectTeacher_FK1" Association="Self.Teacher_GradeSubjectTeacher_FK1">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="GradeSubjectTeacher" EntitySet="GradeSubjectTeachers" />
+          </AssociationSet>
+          <AssociationSet Name="User_Parent_FK1" Association="Self.User_Parent_FK1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Parent" EntitySet="Parents" />
+          </AssociationSet>
+          <AssociationSet Name="School_Student_FK1" Association="Self.School_Student_FK1">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="School_Teacher_FK1" Association="Self.School_Teacher_FK1">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="Teacher" EntitySet="Teachers" />
+          </AssociationSet>
+          <AssociationSet Name="School_User_FK1" Association="Self.School_User_FK1">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="SessionType_Session_FK1" Association="Self.SessionType_Session_FK1">
+            <End Role="SessionType" EntitySet="SessionTypes" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="Subject_Session_FK1" Association="Self.Subject_Session_FK1">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="Venue_Session_FK1" Association="Self.Venue_Session_FK1">
+            <End Role="Venue" EntitySet="Venues" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="Weekday_Session_FK1" Association="Self.Weekday_Session_FK1">
+            <End Role="Weekday" EntitySet="Weekdays" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="StudentParent" Association="Self.StudentParent">
+            <End Role="Parent" EntitySet="Parents" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="StudentSession" Association="Self.StudentSession">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="TeacherSession" Association="Self.TeacherSession">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="Teacher" EntitySet="Teachers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="TTA_ERDEntities">
+          <EntitySetMapping Name="AcademicYears">
+            <EntityTypeMapping TypeName="Model.AcademicYear">
+              <MappingFragment StoreEntitySet="AcademicYear">
+                <ScalarProperty Name="AcademicYearID" ColumnName="AcademicYearID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccessLevels">
+            <EntityTypeMapping TypeName="Model.AccessLevel">
+              <MappingFragment StoreEntitySet="AccessLevel">
+                <ScalarProperty Name="AccessLevelID" ColumnName="AccessLevelID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="Model.Grade">
+              <MappingFragment StoreEntitySet="Grade">
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GradeSubjectTeachers">
+            <EntityTypeMapping TypeName="Model.GradeSubjectTeacher">
+              <MappingFragment StoreEntitySet="GradeSubjectTeacher">
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parents">
+            <EntityTypeMapping TypeName="Model.Parent">
+              <MappingFragment StoreEntitySet="Parent">
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schools">
+            <EntityTypeMapping TypeName="Model.School">
+              <MappingFragment StoreEntitySet="School">
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Addess" ColumnName="Addess" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sessions">
+            <EntityTypeMapping TypeName="Model.Session">
+              <MappingFragment StoreEntitySet="Session">
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+                <ScalarProperty Name="VenueID" ColumnName="VenueID" />
+                <ScalarProperty Name="WeekdayID" ColumnName="WeekdayID" />
+                <ScalarProperty Name="SessionTypeID" ColumnName="SessionTypeID" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="AcademicYearID" ColumnName="AcademicYearID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SessionTypes">
+            <EntityTypeMapping TypeName="Model.SessionType">
+              <MappingFragment StoreEntitySet="SessionType">
+                <ScalarProperty Name="SessionTypeID" ColumnName="SessionTypeID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="Model.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="Model.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="Model.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="AccessLevelID" ColumnName="AccessLevelID" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Venues">
+            <EntityTypeMapping TypeName="Model.Venue">
+              <MappingFragment StoreEntitySet="Venue">
+                <ScalarProperty Name="VenueID" ColumnName="VenueID" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MaxCapacity" ColumnName="MaxCapacity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Weekdays">
+            <EntityTypeMapping TypeName="Model.Weekday">
+              <MappingFragment StoreEntitySet="Weekday">
+                <ScalarProperty Name="WeekdayID" ColumnName="WeekdayID" />
+                <ScalarProperty Name="WeekdayName" ColumnName="WeekdayName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="StudentParent" TypeName="Model.StudentParent" StoreEntitySet="StudentParent">
+            <EndProperty Name="Parent">
+              <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+            </EndProperty>
+            <EndProperty Name="Student">
+              <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+              <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="StudentSession" TypeName="Model.StudentSession" StoreEntitySet="StudentSession">
+            <EndProperty Name="Session">
+              <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+              <ScalarProperty Name="SessionTypeID" ColumnName="SessionTypeID" />
+            </EndProperty>
+            <EndProperty Name="Student">
+              <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+              <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="TeacherSession" TypeName="Model.TeacherSession" StoreEntitySet="TeacherSession">
+            <EndProperty Name="Session">
+              <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+              <ScalarProperty Name="SessionTypeID" ColumnName="SessionTypeID" />
+            </EndProperty>
+            <EndProperty Name="Teacher">
+              <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

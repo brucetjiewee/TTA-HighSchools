@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="68bb6263ab484e8097a37b0eda74b50b" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.AcademicYear" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AccessLevel" Width="1.5" PointX="1.5" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Grade" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GradeSubjectTeacher" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Parent" Width="1.5" PointX="6" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.School" Width="1.5" PointX="9" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Session" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SessionType" Width="1.5" PointX="3.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Student" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Subject" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Teacher" Width="1.5" PointX="11.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="3.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Venue" Width="1.5" PointX="3.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Weekday" Width="1.5" PointX="3.75" PointY="12.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.AcademicYear_Session_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.AccessLevel_User_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.Grade_GradeSubjectTeacher_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.Subject_GradeSubjectTeacher_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.Teacher_GradeSubjectTeacher_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.User_Parent_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.School_Student_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.School_Teacher_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.School_User_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.SessionType_Session_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.Subject_Session_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.Venue_Session_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.Weekday_Session_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.StudentParent" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.StudentSession" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.TeacherSession" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
